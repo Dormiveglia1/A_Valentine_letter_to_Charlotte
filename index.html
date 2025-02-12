@@ -191,11 +191,30 @@
                 }
             }
 
+            #musicControl {
+                position: fixed;
+                right: 20px;
+                top: 20px;
+                background-color: rgba(255, 255, 255, 0.8);
+                padding: 10px;
+                border-radius: 5px;
+                font-size: 20px;
+                color: #f08080;
+                cursor: pointer;
+                z-index: 1000;
+            }
         </style>
         <script src="./jquery.min.js"></script>
     </head>
     <body>
         <div id="loveTimer" class="timer"></div>
+        <div id="musicControl">🎵</div>
+
+        <!-- 添加音频元素 -->
+        <audio id="bgMusic" loop>
+            <source src="./ToBeautifulYou.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
 
         <div class="container">
             
@@ -237,7 +256,27 @@
             // 每秒更新一次计时器
             setInterval(updateLoveTimer, 1000);
             updateLoveTimer(); // 立即执行一次，避免初始化延迟
+            let isPlaying = false;
+            const music = document.getElementById('bgMusic');
+            const musicControl = document.getElementById('musicControl');
 
+            musicControl.addEventListener('click', function() {
+                if (isPlaying) {
+                    music.pause();
+                    musicControl.textContent = '🎵';
+                } else {
+                    music.play();
+                    musicControl.textContent = '⏸';
+                }
+                isPlaying = !isPlaying;
+            });
+
+            // 页面加载完成后自动播放音乐
+            window.addEventListener('load', function() {
+                music.play();
+                isPlaying = true;
+                musicControl.textContent = '⏸';
+            });
         </script>
         
     </body>
@@ -368,4 +407,6 @@ function showSeventhPage() {
         $(".next-page-arrow").hide();
     }, false); // 这里传入false，表示不显示箭头
 }
+
+
 </script>
