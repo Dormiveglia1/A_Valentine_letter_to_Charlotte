@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="uft-8">
-        <title>情人节</title>
+        <title>To:一学习就犯困的千悦宝宝</title>
         <style>
             body {
                 margin:0;
@@ -68,9 +68,7 @@
                 ;
             }
 
-            .envelope::after {
-                content:""
-            }
+            
 
             .txt {
                 padding: 30px;
@@ -78,9 +76,27 @@
                 color: #003049;
             }
 
-            .content{
-                margin-left: 20px;
+            .txt .greeting {
+                margin-bottom: 10px;
                 font-size: 20px;
+            }
+
+            .txt .content {
+                font-size: 16px;
+                margin-top: 10px;
+                display: block;
+            }
+
+            .end-content {
+                padding: 30px;
+                font-size: 25px;
+                color: #ea7979;
+                line-height: 2; /* 这里设置行高为字体大小的1.5倍 */
+                margin-top: -70px;
+            }
+
+            .indent {
+                padding-left: 2em;
             }
 
             .shadow {
@@ -88,7 +104,8 @@
                 height: 38px;
                 background: rgb(0 0 0 / 0.3);
                 position: absolute;
-                bottom: 120px;
+                bottom: -100px;
+                left: -20px;
                 border-radius: 50%;
                 animation: shadow-size 3s linear infinite;
             }
@@ -98,7 +115,65 @@
                 animation: up 3s linear infinite;
                 cursor: pointer;
             }
+            
+            @keyframes blink {
+                0% { opacity: 1; }
+                50% { opacity: 0; }
+                100% { opacity: 1; }
+            }
 
+            .cursor {
+                display: inline-block;
+                width: 10px;
+                height: 20px;
+                background-color: #003049;
+                animation: blink 0.7s infinite;
+                margin-left: 2px;
+            }
+            
+            /* 添加计时器样式 */
+            .timer {
+                position: fixed;
+                left: 20px;
+                top: 20px;
+                background-color: rgba(255, 255, 255, 0.8);
+                padding: 10px;
+                border-radius: 5px;
+                font-size: 16px;
+                color: #f08080;
+                z-index: 1000;
+            }
+
+            .new-paper {
+                position: absolute;
+                right: -100%;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 400px;
+                height: 500px;
+                background-color: #eae2b7;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                opacity: 0;
+                transition: opacity 1s ease;
+                }
+
+            .new-content {
+                padding: 30px;
+                font-size: 16px;
+                color: #003049;
+                line-height: 2; /* 这里设置行高为字体大小的1.5倍 */
+            }
+            
+
+            .next-page-arrow {
+                position: absolute;
+                right: 20px;
+                bottom: 20px;
+                font-size: 30px;
+                cursor: pointer;
+            }
+            
             @keyframes up {
                 0%, 100% {
                     transform: translateY(0);
@@ -115,59 +190,182 @@
                     transform: scaleX(0.85);
                 }
             }
+
         </style>
         <script src="./jquery.min.js"></script>
     </head>
     <body>
+        <div id="loveTimer" class="timer"></div>
+
         <div class="container">
+            
             <div class="valentine">
                 <div class="envelope"></div>
                 <div class="card">
-                    <div class="txt"></div>
+                    <div class="txt">
+                        <div class="greeting"></div>
+                        <div class="content"></div>
+                    </div>
                 </div>
-                    
                 <div class="front"></div>
-                
-                
+                <div class="shadow"></div>
             </div>
-            <div class="shadow"></div>
+            <div class="new-paper">
+                <div class="new-content"></div>
+                <div class="end-content"></div>
+                <div class="next-page-arrow" style="display: none;">&rarr;</div>
+            </div>
         </div>
-        
+
+        <script>
+
+            // 添加计时器功能
+            function updateLoveTimer() {
+                const startDate = new Date('2024-08-22T00:00:00');
+                const now = new Date();
+                const diff = now - startDate;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('loveTimer').innerHTML = 
+                    `我们已经恋爱：${days}天${hours}小时${minutes}分钟${seconds}秒`;
+            }
+
+            // 每秒更新一次计时器
+            setInterval(updateLoveTimer, 1000);
+            updateLoveTimer(); // 立即执行一次，避免初始化延迟
+
+        </script>
         
     </body>
 </html>
 <script>
-    $(".valentine").mouseenter(() => {
-        $(".card").animate({
-            top:"-90px"
-        },"slow")
-        typewriter()
-    })
+let isCardOpen = false;
+let currentPage = 0;
 
-    $(".valentine").mouseleave(() => {
+$(".valentine").click(() => {
+    if (!isCardOpen) {
+        isCardOpen = true;
+        currentPage = 2;
         $(".card").animate({
-            top: 0
-        },"slow")
-    })
+            top: "-90px"
+        }, "slow", function() {
+            typewriter($(".greeting"), "To 一学习就犯困的千悦宝宝:", () => {
+                typewriter($(".content"), "<span class='indent'>这是和宝宝一起过的第一个情人节！！！<br>虽然每天都在和你聊天，但我想借这个特别的日子，把心里的话写给你。", showSecondPage);
+            });
+        });
+    }
+});
 
-function typewriter(){
-    const el = $(".txt");
-    const str = `你好:
-        <div class="content">2月14日情人节快乐</div>
-        `
+function showNextPageArrow() {
+    $(".next-page-arrow").show();
+}
+
+$(".next-page-arrow").click(() => {
+    currentPage++;
+    if (currentPage === 2) {
+        showSecondPage();
+    } if (currentPage === 3) {
+        showThirdPage();
+    } if (currentPage === 4) {
+        showFourthPage();
+    } if (currentPage === 5) {
+        showFifthPage();
+    } if (currentPage === 6) {
+        showSixthPage();
+    } if (currentPage === 7) {
+        showSeventhPage();
+    }
     
-        let progress = 0;
-        const timer = setInterval(() => {
-            const curr = str.substr(progress, 1)
-            if(curr === "<"){
-                progress = str.indexOf(">", progress) + 1
-            }else{
-                progress++
-            }
-            el.html(str.substr(0, progress) + (progress & 1 ? "_" : "") )
-            if (progress >= str.length){
-                clearInterval(timer)
-            }
-        }, 100)
+});
+function typewriter(el, str, callback,showArrow = true) {
+    let progress = 0;
+    el.html(''); // 清空内容，避免重复
+    $(".next-page-arrow").hide(); // 开始打字时隐藏箭头
+    
+    const cursor = $('<span class="cursor"></span>');
+    el.append(cursor);
+    
+    const timer = setInterval(() => {
+        if (progress >= str.length) {
+            clearInterval(timer);
+            cursor.remove(); // 移除光标
+            if (callback) callback();
+            if (showArrow) showNextPageArrow();
+            return;
+        }
+
+        const curr = str.substr(progress, 1);
+        if (curr === '<') {
+            const endIndex = str.indexOf('>', progress) + 1;
+            cursor.before($(str.substring(progress, endIndex)));
+            progress = endIndex;
+        } else {
+            cursor.before(curr);
+            progress++;
+        }
+    }, 100);
+}
+
+
+function showSecondPage() {
+        setTimeout(() => {
+        // 信封左移动画
+        $(".valentine").animate({
+            left: "-20%"
+        }, 1500);
+
+        // 新纸张淡入
+        $(".new-paper").css({
+            right: "10%",
+            opacity: 1
+        });
+            
+        // 在新纸张上显示文字
+        typewriter($(".new-content"), "<span class='indent'>我们的相遇是在一个6月凌晨的峡谷，未曾想到一次主动的邀请就为之后的缘分埋下了伏笔。一开始也只是因为声音甜美吧，想以游戏搭子的身份相处。但随着交流的增多，我也越来越了解你，明显地感觉到“这个女孩很聪明，三观也和我很合得来”。不知道从什么时候开始我慢慢喜欢上这种和你聊天的感觉，每天和你一起的时间变成了最快乐的时光，爱的种子就在这时发芽了。慢慢和你距离的拉进，从只是打游戏到分享生活，再到一起看电影，我确定了这就是爱的感觉。也担心过被拒绝，但是更不想错过，终于还是鼓起勇气开始了第一次的异地恋。", showNextPageArrow());
+        },2000);
+}
+
+function showThirdPage() {
+    // 等待一段时间后开始第三页内容
+    $(".new-content").html('');
+        
+        
+    typewriter($(".new-content"), "<span class='indent'>我知道，我们有着年龄、距离的压力，但你还是义无反顾地接受了，非常感谢你的勇气。在一起之后，我们过着甜甜蜜蜜的生活，虽然没有办法天天见面，但是每时每刻的报备和连麦让我感觉安全感满满！我也有努力在做一个称职男朋友，分享我的开心，吸收你的难过。第一次这么真切地感受到恋爱的感觉，从我们在一起的那天起，我的世界就变得不一样了。你的笑容像阳光一样照进我的生活，让我的每一天都充满温暖和期待。无论一天有多么疲惫，只要看到你在视频那头的脸，所有的不开心都会抛在脑后。<br>", showNextPageArrow());
+    
+}
+function showFourthPage() {
+
+    $(".new-content").html('');
+        
+    typewriter($(".new-content"), "<span class='indent'>很快我们就到了要见面的时候啦！能看得出来你当时真的很焦虑，其实我也问过自己“真实见到的宝宝和网上的会不会有差别，会不会因为第一次见面太拘束”。在来接机的路上我紧张地手都在发抖，根本无法静下心来思考问题，直到在机场见到你的时候，一切心中的无法确定都有了答案。回到家，做完饭的我回来看到床上已经睡着的你，一边是心疼宝宝一路的奔波，一边是第一次有种家的温馨感。直到吃饭的时候看到你的笑容我才知道，我找到了我真正想要守护的东西。一起度过了最开心的几天，终究还是要离别，约定好不哭的我看着你在机场远去的背影还是泛出了泪花。",showNextPageArrow());
+      
+}
+
+function showFifthPage() {
+    
+    $(".new-content").html('');
+        
+    typewriter($(".new-content"), "<span class='indent'>天气慢慢转凉，但是我的心却越来越沸腾，我知道这意味着我们又要见面啦！！这次换我奔向你咯！甚至是我第一次一个人坐飞机旅行，但是一点也没有害怕的感觉！一起逛商场、逛超市、做蛋糕、做饭，我们愈发像一对结婚许久的夫妻。感情也不需要像电影里面那样轰轰烈烈，只要是你，粗茶淡饭、柴米油盐也别有一番趣味。<br><span class='indent'>还有还有！！你精心准备的生日礼物！！真的有被感动到呜呜呜呜呜呜！戴上宝宝亲手制作的戒指，满满的人夫感！！！ <pr>PS：找不到它的时候真的很慌张！！！宝宝安慰我的时候我都要哭出来了，好在最后找到啦！", showNextPageArrow());
+      
+}
+function showSixthPage() {
+    
+    $(".new-content").html('');
+        
+    typewriter($(".new-content"), "<span class='indent'>谢谢你一直以来的陪伴和包容，虽然一直说自己会换位思考什么的，但是也并没有做到十全十美，有时也会惹你生气。但你总是耐心地和我沟通，我们有什么问题都会立刻去解决，而不是冷战或者逃避。我知道自己有时候可能会固执、会忙于学业、会一个人不开心，但你总是在我身边，给我支持和理解。跟你在一起真的让我成长了许多，谢谢你把我变成你的形状（？）。<pr>你的存在，让我相信世界上最美好的事情，就是能和你一起走过每一天。", showNextPageArrow());
+      
+}
+
+function showSeventhPage() {
+    $(".end-content").html('');
+    $(".new-content").html('');
+        
+    typewriter($(".end-content"), "<span class='indent'>未来的路上，我希望我们可以一起经历更多的美好，一起去想去的地方，一起实现各自的梦想，一起分享生活中的点滴。无论未来有多少挑战，我都想和你一起面对，一起成长，一起变得更好。<br><span class='indent'>愿我们每一天都像情人节一样浪漫和甜蜜。", function() {
+        $(".next-page-arrow").hide();
+    }, false); // 这里传入false，表示不显示箭头
 }
 </script>
