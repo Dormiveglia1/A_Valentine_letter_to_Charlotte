@@ -260,23 +260,29 @@
             const music = document.getElementById('bgMusic');
             const musicControl = document.getElementById('musicControl');
 
+            function playMusic() {
+                music.play().then(() => {
+                    isPlaying = true;
+                    musicControl.textContent = '⏸';
+                }).catch((error) => {
+                    console.error("自动播放失败:", error);
+                    musicControl.textContent = '🎵 点击播放音乐';
+                    musicControl.style.backgroundColor = '#ffcccc';  // 使按钮更显眼
+                });
+            }
+
             musicControl.addEventListener('click', function() {
                 if (isPlaying) {
                     music.pause();
-                    musicControl.textContent = '🎵';
+                    musicControl.textContent = '🎵 播放音乐';
+                    isPlaying = false;
                 } else {
-                    music.play();
-                    musicControl.textContent = '⏸';
+                    playMusic();
                 }
-                isPlaying = !isPlaying;
             });
 
-            // 页面加载完成后自动播放音乐
-            window.addEventListener('load', function() {
-                music.play();
-                isPlaying = true;
-                musicControl.textContent = '⏸';
-            });
+    // 尝试在页面加载时自动播放
+    window.addEventListener('load', playMusic);
         </script>
         
     </body>
