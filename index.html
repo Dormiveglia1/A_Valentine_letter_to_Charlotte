@@ -323,6 +323,8 @@ $(".next-page-arrow").click(() => {
         showSixthPage();
     } if (currentPage === 7) {
         showSeventhPage();
+    } if (currentPage === 8) {
+        showEighthPage();
     }
     
 });
@@ -379,14 +381,14 @@ function showThirdPage() {
     $(".new-content").html('');
         
         
-    typewriter($(".new-content"), "<span class='indent'>我知道，我们有着年龄、距离的压力，但你还是义无反顾地接受了，非常感谢你的勇气。<br><span class='indent'>在一起之后，我们过着甜甜蜜蜜的生活，虽然没有办法天天见面，但是每时每刻的报备和连麦让我感觉安全感满满！我也有努力在做一个称职男朋友，分享我的开心，吸收你的难过。第一次这么真切地感受到恋爱的感觉，从我们在一起的那天起，我的世界就变得不一样了。你的笑容像阳光一样照进我的生活，让我的每一天都充满温暖和期待。无论一天有多么疲惫，只要看到你在视频那头的脸，所有的不开心都会抛在脑后。<br>", showNextPageArrow());
+    typewriter($(".new-content"), "<span class='indent'>我知道，我们有着年龄、距离的压力，但你还是义无反顾地接受了，非常感谢你的勇气。<br><span class='indent'>在一起之后，我们过着甜甜蜜蜜的生活，虽然没有办法天天见面，但是每时每刻的报备和连麦让我感觉安全感满满，每天早晚约定好的“我爱你”，是我们感情的保险秘诀！我也有努力在做一个称职男朋友，分享我的开心，吸收你的难过。第一次这么真切地感受到恋爱的感觉，从我们在一起的那天起，我的世界就变得不一样了。你的笑容像阳光一样照进我的生活，让我的每一天都充满温暖和期待。无论一天有多么疲惫，只要看到你在视频那头的脸，所有的不开心都会抛在脑后。<br>", showNextPageArrow());
     
 }
 function showFourthPage() {
 
     $(".new-content").html('');
         
-    typewriter($(".new-content"), "<span class='indent'>很快我们就到了要见面的时候啦！能看得出来你当时真的很焦虑，其实我也问过自己“真实见到的宝宝和网上的会不会有差别，会不会因为第一次见面太拘束”。在来接机的路上我紧张地手都在发抖，根本无法静下心来思考问题，直到在机场见到你的时候，一切心中的无法确定都有了答案。回到家，做完饭的我回来看到床上已经睡着的你，一边是心疼宝宝一路的奔波，一边是第一次有种家的温馨感。直到吃饭的时候看到你的笑容我才知道，我找到了我真正想要守护的东西。<br><span class='indent'>一起度过了最开心的几天，终究还是要离别，约定好不哭的我看着你在机场远去的背影还是泛出了泪花。",showNextPageArrow());
+    typewriter($(".new-content"), "<span class='indent'>很快我们就到了要见面的时候啦！能看得出来你当时真的很焦虑，其实我也问过自己“真实见到的宝宝和网上的会不会有差别，会不会因为第一次见面太拘束”。在来接机的路上我紧张地手都在发抖，根本无法静下心来思考问题，直到在机场见到你的时候，一切心中的无法确定都有了答案。<br><span class='indent'>回到家，做完饭的我回来看到床上已经睡着的你，一边是心疼宝宝一路的奔波，一边是第一次有种家的温馨感。直到吃饭的时候看到你的笑容我才知道，我找到了我真正想要守护的东西。<br><span class='indent'>一起度过了最开心的几天，终究还是要离别，约定好不哭的我看着你在机场远去的背影还是泛出了泪花。",showNextPageArrow());
       
 }
 
@@ -397,7 +399,16 @@ function showFifthPage() {
     typewriter($(".new-content"), "<span class='indent'>天气慢慢转凉，但是我的心却越来越沸腾，我知道这意味着我们又要见面啦！！这次换我奔向你咯！甚至是我第一次一个人坐飞机旅行，但是一点也没有害怕的感觉！<br><span class='indent'>一起逛商场、逛超市、做蛋糕、做饭，我们愈发像一对结婚许久的夫妻。感情也不需要像电影里面那样轰轰烈烈，只要是你，粗茶淡饭、柴米油盐也别有一番趣味。<br><span class='indent'>还有还有！！你精心准备的生日礼物！！真的有被感动到呜呜呜呜呜呜！戴上宝宝亲手制作的戒指，满满的人夫感！！！ <pr>PS：找不到它的时候真的很慌张！！！宝宝安慰我的时候我都要哭出来了，好在最后找到啦！", showNextPageArrow());
       
 }
-function showSixthPage() {
+
+function showsixthPage() {
+    
+    $(".new-content").html('');
+        
+    typewriter($(".new-content"), "<span class='indent'>短暂的相处后迎来的又是漫长异地，跟第一次分别相比，我有坚强许多！我们又回到了各自的城市，忙碌奔走于自己两点一线的生活，但我们的心却从未分开！<br><span class='indent'>每一次的相见都让我们更加珍惜彼此，也让我们更加期待未来的生活。我们曾经畅想过很多关于未来的画面，未来有一天，我们可以不再需要计算着见面的日子，而是每天醒来都能看到彼此的笑脸。等到那个时候，我们的故事会变得更加完整，而我们的爱情，也会一直这样坚定地走下去。", showNextPageArrow());
+      
+}
+
+function showSeventhPage() {
     
     $(".new-content").html('');
         
@@ -405,7 +416,7 @@ function showSixthPage() {
       
 }
 
-function showSeventhPage() {
+function showEighthPage() {
     $(".end-content").html('');
     $(".new-content").html('');
         
